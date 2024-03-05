@@ -126,10 +126,19 @@ int main(){
     ios_base::sync_with_stdio(0);
     cin.tie(0);
     cout.tie(0);
-	sieve(2000);
-	for (auto i : p) {
-		cout << i << endl;
-	}
+	sieve(10000000);
+	vll r;
+	r = primeFactors((1LL << 31) - 1); // Mersenne prime
+	for (auto& pf : r) printf("> %lld\n", pf);
+	r = primeFactors(136117223861LL); // large prime factors
+	for (auto& pf : r) printf("> %lld\n", pf); // 104729*1299709
+	r = primeFactors(5000000035LL); // large prime factors
+	for (auto& pf : r) printf("> %lld\n", pf); // 5*1000000007
+	r = primeFactors(142391208960LL); // large composite
+	for (auto& pf : r) printf("> %lld\n", pf); // 2^10*3^4*5*7^4*11*13
+	r = primeFactors(100000380000361LL); // 10000019^2
+	for (auto& pf : r) printf("> %lld\n", pf); // fail to factor! (why?)
+
 	
 	return 0;
 	
