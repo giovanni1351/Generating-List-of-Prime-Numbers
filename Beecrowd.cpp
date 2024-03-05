@@ -112,6 +112,16 @@ bool isPrime(ll N) { // good enough prime test
 			return false;
 	return true; // slow if N = large prime
 }
+vll primeFactors(ll N) { // pre-condition, N >= 1
+	vll factors;
+	for (int i = 0; (i < (int)p.size()) && (p[i] * p[i] <= N); ++i)
+		while (N % p[i] == 0) { // found a prime for N
+			N /= p[i]; // remove it from N
+			factors.push_back(p[i]);
+		}
+	if (N != 1) factors.push_back(N); // remaining N is a prime
+	return factors;
+}	
 int main(){
     ios_base::sync_with_stdio(0);
     cin.tie(0);
