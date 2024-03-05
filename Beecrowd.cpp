@@ -122,6 +122,38 @@ vll primeFactors(ll N) { // pre-condition, N >= 1
 	if (N != 1) factors.push_back(N); // remaining N is a prime
 	return factors;
 }	
+int numDiv(ll N) {
+	int ans = 1; // start from ans = 1
+	for (int i = 0; (i < (int)p.size()) && (p[i] * p[i] <= N); ++i) {
+		int power = 0; // count the power
+		while (N % p[i] == 0) { N /= p[i]; ++power; }
+		ans *= power + 1; // follow the formula
+	}
+	return (N != 1) ? 2 * ans : ans; // last factor = N^1
+}
+ll sumDiv(ll N) {
+	ll ans = 1; // start from ans = 1
+	for (int i = 0; (i < (int)p.size()) && (p[i] * p[i] <= N); ++i) {
+		ll multiplier = p[i], total = 1;
+		while (N % p[i] == 0) {
+			N /= p[i];
+			total += multiplier;
+			multiplier *= p[i];
+		} // total for
+		ans *= total; // this prime factor
+	}
+	if (N != 1) ans *= (N + 1); // N^2-1/N-1 = N+1
+	return ans;
+}
+ll EulerPhi(ll N) {
+	ll ans = N; // start from ans = N
+	for (int i = 0; (i < (int)p.size()) && (p[i] * p[i] <= N); ++i) {
+		if (N % p[i] == 0) ans -= ans / p[i]; // count unique
+		while (N % p[i] == 0) N /= p[i]; // prime factor
+	}
+	if (N != 1) ans -= ans / N; // last factor
+	return ans;
+}
 int main(){
     ios_base::sync_with_stdio(0);
     cin.tie(0);
